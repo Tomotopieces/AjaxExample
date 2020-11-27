@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax Page</title>
+
+    <!-- import Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- the title will be changed after clicking the button -->
+    <h1 id="title">Origin Title</h1>
+    <form id="loginForm">
+        Username: <input name="username" type="text"><br>
+        Password: <input name="password" type="password"><br>
+        <!-- default button type is 'submit', need specify to 'button' -->
+        <button type="button" id="submit">submit</button>
+    </form>
+
+    <script>
+        $(() => {
+            $('#submit').on('click', () => {
+                $.ajax({
+                    type: "POST",
+                    url: "user.do",
+                    data: $('#loginForm').serialize(),
+                    success: data => {
+                        $('#title').html(data);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
